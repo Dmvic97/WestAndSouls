@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      western2Sheet_0: 4637891954923571009
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
