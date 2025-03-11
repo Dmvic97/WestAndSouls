@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
     public LayerMask groundLayer;
 
+    [Header("Fire")]
+    public Transform shootingPoint;
+    public GameObject bulletPrefab;
+
     void Update()
     {
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
@@ -41,6 +45,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Fire(InputAction.CallbackContext context)
+    {
+        Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
