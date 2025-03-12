@@ -23,11 +23,29 @@ public class PlayerMovement : MonoBehaviour
     public Transform shootingPoint;
     public GameObject bulletPrefab;
 
+    [Header("Gravity")]
+    public float baseGravity = 2;
+    public float maxFallSpeed = 18f;
+    public float fallSpeedMultiplier = 2f;
+
     void Update()
     {
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        Gravity();
     }
 
+    private void Gravity()
+    {
+        if(rb.linearVelocity.y < 0)
+        {
+            rb.gravityScale = baseGravity * fallSpeedMultiplier; //Usamos la gravedad para afectar a la caída y que no se sienta como que el pj flota
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed)); //Limita la máxima velocidad de caída
+        }
+        else
+        {
+            rb.gravityScale = baseGravity;
+        }
+    }
     public void Move(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x; //Forma en que detecte el movimiento en el eje x
@@ -45,6 +63,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool isGrounded()
+    {
+        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
+        {
+            return true;
+        }
+        return false; 
+    }
     public void Fire(InputAction.CallbackContext context)
     {
         Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
