@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     
     public Rigidbody2D rb;
+    bool isFacingRight = true;
+    public Animator animator;
     [Header("Movement")]
     public float moveSpeed = 5f;
     float horizontalMovement;
@@ -32,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
         Gravity();
+        Flip();
+        animator.SetFloat("yVelocity", rb.linearVelocity.y);
+        animator.SetFloat("magnitude", rb.linearVelocity.magnitude);
     }
 
     private void Gravity()
@@ -58,10 +63,12 @@ public class PlayerMovement : MonoBehaviour
             if (context.performed)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+                animator.SetTrigger("Jump");
             }
             else if (context.canceled)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+                animator.SetTrigger("Jump");
             }
         }
         
@@ -75,9 +82,28 @@ public class PlayerMovement : MonoBehaviour
         }
         return false; 
     }
+
+    private void Flip()
+    {
+        if ( isFacingRight && horizontalMovement < 0 || !isFacingRight && horizontalMovement > 0)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            if (isFacingRight == false)
+            {
+                ls.x = -1f; //cambiar la escala del eje x del sprite hace que voltee
+            }
+            else
+            {
+                ls.x = 1f;
+            }
+            transform.localScale = ls;
+        }
+    }
     public void Fire(InputAction.CallbackContext context)
     {
         Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
+        animator.SetTrigger("Shot");
     }
     private void OnDrawGizmosSelected()
     {
