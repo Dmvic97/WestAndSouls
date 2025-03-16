@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     bool isFacingRight = true;
     public Animator animator;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     float horizontalMovement;
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         Gravity();
         Flip();
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
-        animator.SetFloat("magnitude", rb.linearVelocity.magnitude);
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
     }
 
     private void Gravity()
@@ -88,16 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if ( isFacingRight && horizontalMovement < 0 || !isFacingRight && horizontalMovement > 0)
         {
             isFacingRight = !isFacingRight;
-            Vector3 ls = transform.localScale;
-            if (isFacingRight == false)
-            {
-                ls.x = -1f; //cambiar la escala del eje x del sprite hace que voltee
-            }
-            else
-            {
-                ls.x = 1f;
-            }
-            transform.localScale = ls;
+            transform.Rotate(0f, 180f, 0f);
         }
     }
     public void Fire(InputAction.CallbackContext context)
