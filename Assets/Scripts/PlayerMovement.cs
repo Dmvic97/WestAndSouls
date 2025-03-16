@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Fire")]
     public Transform shootingPoint;
     public GameObject bulletPrefab;
+    public float attackCooldown;
+    private float cooldownTimer = Mathf.Infinity;
 
     [Header("Gravity")]
     public float baseGravity = 2;
@@ -96,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
         animator.SetTrigger("Shot");
+        Destroy(bulletPrefab, 10f);
     }
     private void OnDrawGizmosSelected()
     {

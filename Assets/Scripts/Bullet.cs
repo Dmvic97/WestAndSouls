@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb;
+    public int bulletDamage = 1;
 
     // Update is called once per frame
     void Start()
@@ -13,15 +14,16 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = transform.right * speed;
     }
-    /*
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<Enemy>();
 
-        if enemy(enemy != null) 
+        if (enemy) 
         {
-            enemy.TakeDamage(20);
+            enemy.TakeDamage(bulletDamage);
+            Destroy(gameObject);
         }
     }
-    */
+    
 }
