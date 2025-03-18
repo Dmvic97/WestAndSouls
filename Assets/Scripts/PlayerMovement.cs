@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
         animator.SetTrigger("Shot");
-        Destroy(bulletPrefab, 10f);
+        Destroy(bulletPrefab, 1f);
     }
     private void OnDrawGizmosSelected()
     {

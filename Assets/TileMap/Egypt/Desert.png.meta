@@ -280,7 +280,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -294,7 +294,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -318,7 +318,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -2159,7 +2159,89 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Desert_0: 130452656225014213
+      Desert_1: -1684463988762818810
+      Desert_10: 4357044945649823405
+      Desert_11: -5546169963851916408
+      Desert_12: 8787155665117254736
+      Desert_13: 3071275658661546787
+      Desert_14: -2652693293121697407
+      Desert_15: -4932994266883439943
+      Desert_16: 2925299890117126709
+      Desert_17: 5455571804174226438
+      Desert_18: 6747880713673063236
+      Desert_19: -4553087126160766624
+      Desert_2: -8034199350092224423
+      Desert_20: -4949627433556570602
+      Desert_21: -8699625482541703765
+      Desert_22: 4753334088907740339
+      Desert_23: 2017584122348643233
+      Desert_24: 6736723111324149197
+      Desert_25: 1413824859108785202
+      Desert_26: 1720628983494029871
+      Desert_27: 6752001963717807473
+      Desert_28: -8889460602187700167
+      Desert_29: 177669463780978171
+      Desert_3: -3472776297332130694
+      Desert_30: 693460620139924369
+      Desert_31: -8090357455017542349
+      Desert_32: -7376658894980979686
+      Desert_33: 8618043442569853721
+      Desert_34: -1891244313942073252
+      Desert_35: -8331338080179206456
+      Desert_36: -2092669297930739559
+      Desert_37: 6677440907238784420
+      Desert_38: 263114726737046106
+      Desert_39: -219950700704652379
+      Desert_4: 2200316129524247793
+      Desert_40: 7476028836548432936
+      Desert_41: -7056205624446473601
+      Desert_42: 2445486689009598530
+      Desert_43: 7650648958496539400
+      Desert_44: -1440213720829887421
+      Desert_45: -6534215636157876685
+      Desert_46: -3014070355108774602
+      Desert_47: 5102942358374564972
+      Desert_48: 3732817706624730552
+      Desert_49: -7536534112240138014
+      Desert_5: 7868347602809382003
+      Desert_50: -6901723674927631458
+      Desert_51: -2236755735261204798
+      Desert_52: 4120230913768585192
+      Desert_53: 8088958799486163492
+      Desert_54: -8979116795834433483
+      Desert_55: -1371961471958757424
+      Desert_56: -3835296844453121775
+      Desert_57: -1249548870782341697
+      Desert_58: -6819377448497701395
+      Desert_59: 2354611394972426685
+      Desert_6: -1407267355242168244
+      Desert_60: -3359170804855829306
+      Desert_61: 4514473663050018801
+      Desert_62: 8711033294963031730
+      Desert_63: -6367095881092683122
+      Desert_64: 496326305710115257
+      Desert_65: 1895843252002740093
+      Desert_66: 7841457486030849358
+      Desert_67: -9166542429149124443
+      Desert_68: 5084632137446161242
+      Desert_69: -8664637547257207880
+      Desert_7: 8511966426888049946
+      Desert_70: -8159835467187066341
+      Desert_71: 810952631799630755
+      Desert_72: 405174149799415547
+      Desert_73: 7713846922921036432
+      Desert_74: -8432701265682475786
+      Desert_75: 799012378028144744
+      Desert_76: -4100015872941540130
+      Desert_77: 6947639585788717494
+      Desert_78: 9104196195725959475
+      Desert_79: -7569237213358423682
+      Desert_8: 1494933670736963382
+      Desert_80: -6356988114034044908
+      Desert_81: -5284766048586446307
+      Desert_9: -3958981189103962199
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

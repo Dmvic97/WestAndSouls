@@ -178,7 +178,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -192,7 +192,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -216,7 +216,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1309,7 +1309,55 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Desert_Quick_Sand_0: 1417828545160255173
+      Desert_Quick_Sand_1: -1236921910601378545
+      Desert_Quick_Sand_10: 3787054892484090711
+      Desert_Quick_Sand_11: 692322227436441391
+      Desert_Quick_Sand_12: 6063248734261406766
+      Desert_Quick_Sand_13: 952403796977308220
+      Desert_Quick_Sand_14: -3715244627038955816
+      Desert_Quick_Sand_15: -600615629522342176
+      Desert_Quick_Sand_16: -8304398472919103866
+      Desert_Quick_Sand_17: 6125067640157698349
+      Desert_Quick_Sand_18: 5574220779145335616
+      Desert_Quick_Sand_19: 5975754806225982600
+      Desert_Quick_Sand_2: -8766186142557700842
+      Desert_Quick_Sand_20: -1260108425754230416
+      Desert_Quick_Sand_21: 2809668255106845958
+      Desert_Quick_Sand_22: -8953221931831218178
+      Desert_Quick_Sand_23: -5231176649681363195
+      Desert_Quick_Sand_24: 8833943865203037096
+      Desert_Quick_Sand_25: 7434033146765480116
+      Desert_Quick_Sand_26: -3698386403670953228
+      Desert_Quick_Sand_27: 7127586692959803127
+      Desert_Quick_Sand_28: 4113036950997601231
+      Desert_Quick_Sand_29: -3404129925929868909
+      Desert_Quick_Sand_3: 8747680215469748456
+      Desert_Quick_Sand_30: -5960301998275603216
+      Desert_Quick_Sand_31: 3091122127893840460
+      Desert_Quick_Sand_32: 9053712166440336617
+      Desert_Quick_Sand_33: 2564489624106659256
+      Desert_Quick_Sand_34: -3542394842683296595
+      Desert_Quick_Sand_35: -5836590178086003329
+      Desert_Quick_Sand_36: 7993636040819658818
+      Desert_Quick_Sand_37: 1781208877349796348
+      Desert_Quick_Sand_38: 8978631836289206623
+      Desert_Quick_Sand_39: -2213731289463476781
+      Desert_Quick_Sand_4: 8109067587055865461
+      Desert_Quick_Sand_40: -6564378536973569994
+      Desert_Quick_Sand_41: -6609983146112288343
+      Desert_Quick_Sand_42: -5178177505590985458
+      Desert_Quick_Sand_43: 8785685432555973654
+      Desert_Quick_Sand_44: 8593599070933306272
+      Desert_Quick_Sand_45: -6917199083116321631
+      Desert_Quick_Sand_46: -6103086306697631979
+      Desert_Quick_Sand_47: -6978008300465248616
+      Desert_Quick_Sand_5: -1405503177615265725
+      Desert_Quick_Sand_6: -3437151407629236254
+      Desert_Quick_Sand_7: -3418821771058001873
+      Desert_Quick_Sand_8: -6079926491261432157
+      Desert_Quick_Sand_9: -8356027073092782297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
