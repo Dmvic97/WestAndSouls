@@ -534,7 +534,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Desert_Fauna_0: 7667675028303257155
+      Desert_Fauna_1: -628025278607393649
+      Desert_Fauna_10: -2710615947287358747
+      Desert_Fauna_11: 8625143674370568326
+      Desert_Fauna_12: -8740227331475899303
+      Desert_Fauna_13: -1241373327590850440
+      Desert_Fauna_14: -1380624278111349229
+      Desert_Fauna_15: -4114993189799794902
+      Desert_Fauna_16: 7294585926870651800
+      Desert_Fauna_2: -3600970929816895898
+      Desert_Fauna_3: -7329435781079990981
+      Desert_Fauna_4: 5926295644993876865
+      Desert_Fauna_5: 5413701012587045284
+      Desert_Fauna_6: 583052491390333157
+      Desert_Fauna_7: -4477777294312378036
+      Desert_Fauna_8: -5349571678048380089
+      Desert_Fauna_9: -1393650860749657943
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
