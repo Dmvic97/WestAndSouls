@@ -14,6 +14,11 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = transform.right * speed;
     }
+
+    void Update()
+    {
+        DestroyBullet();
+    }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,6 +29,11 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
+    }
+
+    void DestroyBullet()
+    {
+        Destroy(gameObject, 15f);
     }
     
 }

@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Range Attack")]
     [SerializeField] private Transform firepoint;
-    [SerializeField] private GameObject[] bulletPrefab;
+    [SerializeField] private GameObject[] enemyBulletPrefab;
 
     [Header("Collider Parameters")]
     [SerializeField] private float colliderDistance;
@@ -47,8 +47,8 @@ public class Enemy : MonoBehaviour
     private void RangedAttack()
     {
         cooldownTimer = 0;
-        //bulletPrefab[0].transform.position = firepoint.position;
-        //bulletPrefab[0].GetComponent<Bullet>().ActivateProjectile();
+        //enemyBulletPrefab[0].transform.position = firepoint.position;
+        //enemyBulletPrefab[0].GetComponent<Bullet>().ActivateProjectile();
     }
 
     private bool PlayerInSight()

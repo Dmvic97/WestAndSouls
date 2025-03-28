@@ -38,6 +38,10 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
         Gravity();
         Flip();
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Fire();
+        }
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
         animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
     }
@@ -94,11 +98,11 @@ public class PlayerMovement : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
     }
-    public void Fire(InputAction.CallbackContext context)
+    void Fire()
     {
-        Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
+        Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
         animator.SetTrigger("Shot");
-        Destroy(bulletPrefab, 1f);
+        
     }
     private void OnDrawGizmosSelected()
     {
