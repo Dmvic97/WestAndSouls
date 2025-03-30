@@ -10,7 +10,12 @@ public class GameController : MonoBehaviour
         PlayerHealth.OnPlayerDied += GameOverScreen;
         gameOverScreen.SetActive(false);
     }
-
+    /* Se ha movido a un nuevo script "Main Menu"
+    public void PlayGame()
+    {
+        SceneManager.LoadSceneAsync(1);
+    }
+    */
 
     void GameOverScreen()
     {
@@ -29,11 +34,12 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    public void LoadScene(int buildIndex)
+    
+    public void LoadMainMenu()
     {
-        SceneManager.LoadSceneAsync(buildIndex);
+        SceneManager.LoadSceneAsync(0);
     }
+    
     void OnDestroy()
     {
         PlayerHealth.OnPlayerDied -= GameOverScreen;

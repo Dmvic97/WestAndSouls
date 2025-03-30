@@ -33,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
     public float maxFallSpeed = 18f;
     public float fallSpeedMultiplier = 2f;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Update()
     {
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
@@ -102,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
         animator.SetTrigger("Shot");
+        audioManager.PlaySFX(audioManager.shot);
         
     }
     private void OnDrawGizmosSelected()

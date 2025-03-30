@@ -1,99 +1,34 @@
-/*
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GhostMode : MonoBehaviour
 {
-    public float worldSlowMotionFactor = 0.2f; // Cuánto queremos ralentizar el mundo
-    public float playerSpeedFactor = 1.5f; // Factor de velocidad del jugador en tiempo bala
-    public float slowMotionDuration = 2f; // Duración máxima del tiempo bala
-
-    public float maxGhostModeDuration = 5f;
-    
-    [HideInInspector] //permite hacer la variable publica sin que se muestre en el inspector
-    public float currentGhostModeDuration;
-    
-    public float drainRate = 1f; // Consumo de slow motion por segundo
-    public float rechargeRate = 0.5f; // Recarga de slow motion por segundo
-
-    private float normalTimeScale = 1f;
-    private float normalPlayerSpeed = 1f;
-    private bool isGhostModeActive = false;
-    private PlayerMovement playerController;
-    void Start()
-    {
-        playerController = Object.FindFirstObjectByType<PlayerMovement>(); 
-        if (playerController != null)
-        {
-            normalPlayerSpeed = playerController.moveSpeed;
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift)) // Activa el tiempo bala con Shift Izquierdo
-        {
-            ActivateGhostMode();
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift)) // Desactiva el tiempo bala al soltar la tecla
-        {
-            DeactivateGhostMode();
-        }
-    }
-
-    void ActivateGhostMode()
-    {
-        if (!isGhostModeActive)
-        {
-            isGhostModeActive = true;
-            Time.timeScale = worldSlowMotionFactor;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale; // Ajusta la física al nuevo tiempo
-            if (playerController != null)
-            {
-                playerController.moveSpeed = normalPlayerSpeed * playerSpeedFactor;
-            }
-            StartCoroutine(DisableGhostModeAfterDuration());
-        }
-    }
-
-    void DeactivateGhostMode()
-    {
-        isGhostModeActive = false;
-        Time.timeScale = normalTimeScale;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
-        if (playerController != null)
-        {
-            playerController.moveSpeed = normalPlayerSpeed;
-        }
-    }
-
-    System.Collections.IEnumerator DisableGhostModeAfterDuration()
-    {
-        yield return new WaitForSecondsRealtime(slowMotionDuration);
-        DeactivateGhostMode();
-    }
-}
-*/
-using UnityEngine;
-
-public class GhostMode : MonoBehaviour
-{
+    [Header("Movement Stats")]
     public float worldSlowMotionFactor = 0.2f; // Cuánto ralentizamos el mundo
     public float playerSpeedFactor = 1.5f; // Factor de velocidad del jugador en slow motion
+    public float jumpPowerFactor = 1.2f; // Factor para salto
+    public float gravityFactor = 0.5f; // Factor para gravedad
 
-    // Nueva configuración para la duración del slow motion
-    public float maxGhostModeDuration = 5f; // Máximo tiempo de slow motion
-    public float drainRate = 1f; // Consumo de slow motion por segundo
-    public float rechargeRate = 0.5f; // Recarga de slow motion por segundo
+    [Header("Time Stats")]
+    public float maxGhostModeDuration = 5f; // Máximo tiempo
+    public float drainRate = 1f; // Consumo por segundo
+    public float rechargeRate = 0.5f; // Recarga por segundo
 
     private float normalTimeScale = 1f;
-    private float normalPlayerSpeed = 1f;
+    private float normalPlayerSpeed;
+    private float normalJumpPower;
+    private float normalBaseGravity;
+    private float normalFallSpeedMultiplier;
     private bool isGhostModeActive = false;
-    private PlayerMovement playerController; // Referencia al script del jugador
+    
 
-    public GhostBarCharge ghostBarCharge; // Nueva referencia a la barra de recursos
+    [Header("References")]
+    public GhostBarCharge ghostBarCharge; 
+    public Volume postProcessVolume;
+    private PlayerMovement playerController;
 
     [HideInInspector]
-    public float currentGhostModeDuration; // Variable añadida para rastrear la duración del slow motion
+    public float currentGhostModeDuration; // Determina la carga restante del recurso
 
     void Start()
     {
@@ -101,6 +36,9 @@ public class GhostMode : MonoBehaviour
         if (playerController != null)
         {
             normalPlayerSpeed = playerController.moveSpeed;
+            normalJumpPower = playerController.jumpPower;
+            normalBaseGravity = playerController.baseGravity;
+            normalFallSpeedMultiplier = playerController.fallSpeedMultiplier;
         }
 
         currentGhostModeDuration = maxGhostModeDuration; // Inicializa con el valor máximo
@@ -108,16 +46,18 @@ public class GhostMode : MonoBehaviour
 
     void Update()
     {
-        // Modificado: Ahora el slow motion solo se activa si hay recurso disponible
+        //Se activa aprentando la tecla solo si hay recurso disponible
         if (Input.GetKey(KeyCode.LeftShift) && currentGhostModeDuration > 0)
         {
             ActivateGhostMode();
             currentGhostModeDuration -= drainRate * Time.unscaledDeltaTime; // Se gasta mientras está activo
+            postProcessVolume.enabled = true; //Activamos el efecto de postprocesado
         }
         else
         {
             DeactivateGhostMode();
             currentGhostModeDuration += rechargeRate * Time.deltaTime; // Se recarga cuando no está activo
+            postProcessVolume.enabled = false; //Desactivamso el proceso de postprocesado
         }
 
         currentGhostModeDuration = Mathf.Clamp(currentGhostModeDuration, 0, maxGhostModeDuration); // Evita valores fuera del rango
@@ -127,12 +67,15 @@ public class GhostMode : MonoBehaviour
     {
         if (!isGhostModeActive)
         {
-            isGhostModeActive = true;
+            isGhostModeActive = true; //Activamos el ghost mode
             Time.timeScale = worldSlowMotionFactor;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale; //Disminuimos el transcurso del tiempo
             if (playerController != null)
-            {
+            {   //Multimplicamos varios factores para manejar la velocidad del personaje de forma paralela a la ralentizacion
                 playerController.moveSpeed = normalPlayerSpeed * playerSpeedFactor;
+                playerController.jumpPower = normalJumpPower * jumpPowerFactor;
+                playerController.baseGravity = normalBaseGravity * gravityFactor;
+                playerController.fallSpeedMultiplier = normalFallSpeedMultiplier * gravityFactor;
             }
         }
     }
@@ -147,9 +90,10 @@ public class GhostMode : MonoBehaviour
             if (playerController != null)
             {
                 playerController.moveSpeed = normalPlayerSpeed;
+                playerController.jumpPower = normalJumpPower;
+                playerController.baseGravity = normalBaseGravity;
+                playerController.fallSpeedMultiplier = normalFallSpeedMultiplier;
             }
         }
     }
 }
-
-
