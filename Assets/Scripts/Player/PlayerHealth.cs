@@ -6,9 +6,12 @@ using System;
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 3;
-    private int currentHealth;
-  
     
+    [HideInInspector]
+    public int currentHealth;
+    public bool isDead;
+
+    [SerializeField] AudioManager audioManager;
 
     public HealthUI healthUI;
     public static event Action OnPlayerDied;
@@ -17,27 +20,34 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthUI.SetMaxHearts(maxHealth);
+        isDead = false;
     }
 
     
 
     public void TakeDamage(int damage)
     {
+        audioManager.PlaySFX(audioManager.playerHurt);
         currentHealth -= damage;
         healthUI.UpdateHearts(currentHealth);
         
         
-        if (currentHealth > 0)
+        if (currentHealth <= 0)
         {
-            //player hurt
+            Die();
         }
-        else
-        {
-            GetComponent<PlayerMovement>().rb.linearVelocity = new Vector2 (0, 0); //Dejamos al personaje quieto
-            GetComponent<PlayerMovement>().animator.SetTrigger("Dead");
-            GetComponent<PlayerMovement>().enabled = false; //Impedimos que se mueva quieto
+    }
 
-            OnPlayerDied?.Invoke(); //Verificamos que el evento no sea null
-        }
+    void Die()
+    {
+        isDead = true;
+        gameObject.layer = LayerMask.NameToLayer("DeadPlayer"); //Como el script de enemy ataca segun layer,al cambiar el layer dejara de atacar
+        GetComponent<Player>().rb.linearVelocity = new Vector2(0, 0); //Dejamos al personaje quieto
+        GetComponent<Player>().animator.SetTrigger("Dead");
+        GetComponent<Player>().enabled = false; //Impedimos que se mueva quieto
+        audioManager.PlaySFX(audioManager.death);
+
+        audioManager.PlaySFX(audioManager.gameOverScreen);
+        OnPlayerDied?.Invoke(); //Verificamos que el evento no sea null
     }
 }

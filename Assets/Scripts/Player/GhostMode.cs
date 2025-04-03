@@ -25,14 +25,14 @@ public class GhostMode : MonoBehaviour
     [Header("References")]
     public GhostBarCharge ghostBarCharge; 
     public Volume postProcessVolume;
-    private PlayerMovement playerController;
+    private Player playerController;
 
     [HideInInspector]
     public float currentGhostModeDuration; // Determina la carga restante del recurso
 
     void Start()
     {
-        playerController = Object.FindFirstObjectByType<PlayerMovement>(); // Encuentra el script del jugador
+        playerController = Object.FindFirstObjectByType<Player>(); // Encuentra el script del jugador
         if (playerController != null)
         {
             normalPlayerSpeed = playerController.moveSpeed;
