@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip bulletImpact;
     public AudioClip bulletImpactGround;
     public AudioClip gameOverScreen;
+    public AudioClip heal;
 
     private void Start()
     {
