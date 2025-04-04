@@ -97,22 +97,17 @@ public class Player : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (IsGrounded())
+        if (context.performed && IsGrounded()) // Solo salta si está en el suelo
         {
-            if (context.performed)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-                animator.SetTrigger("Jump");
-                
-            }
-            else if (context.canceled)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-                animator.SetTrigger("Jump");
-            }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            animator.SetTrigger("Jump");
             audioManager.PlaySFX(audioManager.jump);
         }
-        
+
+        if (context.canceled && rb.linearVelocity.y > 0) // Si suelta el botón y sigue subiendo
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f); // Reduce la altura del salto
+        }
     }
 
     private bool IsGrounded()

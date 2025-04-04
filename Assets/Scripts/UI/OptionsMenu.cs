@@ -53,7 +53,8 @@ public class OptionsMenu : MonoBehaviour
     public void ChangeBrightSlider(float value)
     {
         sliderBrightValue = value;
-        PlayerPrefs.SetFloat("bright", sliderBright.value); //Guardamos la preferencia
+        PlayerPrefs.SetFloat("bright", sliderBright.value); 
+        PlayerPrefs.Save(); //Guardamos la preferencia
         bright.color = new Color(bright.color.r, bright.color.g, bright.color.b, sliderBright.value);
     }
 
