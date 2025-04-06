@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public Transform shootingPoint;
     public GameObject bulletPrefab;
     public float attackCooldown;
-    //private float cooldownTimer = Mathf.Infinity;
+    
 
     [Header("Gravity")]
     public float baseGravity = 2;
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     [Header("Respawn")]
     public float fallLimit = -2f; //Altura a la que efectuaremos el respawn
     private Vector2 lastPosition; //La ultima posicion en la que se encontraba el jugador antes de caer
+    public LayerMask spawnerLayer;
 
     AudioManager audioManager;
     private float walkInterval = 0.5f; // Para que los pasos se escuchen correctamente tenemos que hacer que suenen cada cierto tiempo,
@@ -114,7 +115,6 @@ public class Player : MonoBehaviour
     {
         if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
         {
-            lastPosition = transform.position;
             return true;
             
         }
@@ -140,14 +140,28 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
     }
-    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Spawn"))
+        {
+            lastPosition = transform.position;
+            Debug.LogWarning("Detecta spawn");
+        }
+    }
     public void Respawn()
     {
         GetComponent<PlayerHealth>().TakeDamage(1);
         //if (GetComponent<PlayerHealth>().currentHealth <= 0) //Si esta muerto no se hace respawn
         //{
-            transform.position = lastPosition;
-            rb.linearVelocity = Vector2.zero;
+        /*
+        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, spawnerLayer))
+        {
+            lastPosition = transform.position;
+            Debug.LogWarning("Detecta spawn");
+        }
+        */
+        transform.position = lastPosition;
+        rb.linearVelocity = Vector2.zero;
         //} Me mata directamente y encima respawnea D:
             
     }

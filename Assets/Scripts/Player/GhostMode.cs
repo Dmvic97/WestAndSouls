@@ -40,7 +40,7 @@ public class GhostMode : MonoBehaviour
             normalBaseGravity = playerController.baseGravity;
             normalFallSpeedMultiplier = playerController.fallSpeedMultiplier;
         }
-
+        postProcessVolume.enabled = false;
         currentGhostModeDuration = maxGhostModeDuration; // Inicializa con el valor máximo
     }
 
@@ -51,7 +51,7 @@ public class GhostMode : MonoBehaviour
         {
             ActivateGhostMode();
             currentGhostModeDuration -= drainRate * Time.unscaledDeltaTime; // Se gasta mientras está activo
-            postProcessVolume.enabled = true; //Activamos el efecto de postprocesado
+            
         }
         else
         {
@@ -70,6 +70,7 @@ public class GhostMode : MonoBehaviour
             isGhostModeActive = true; //Activamos el ghost mode
             Time.timeScale = worldSlowMotionFactor;
             Time.fixedDeltaTime = 0.02f * Time.timeScale; //Disminuimos el transcurso del tiempo
+            postProcessVolume.enabled = true; //Activamos el efecto de postprocesado
             if (playerController != null)
             {   //Multimplicamos varios factores para manejar la velocidad del personaje de forma paralela a la ralentizacion
                 playerController.moveSpeed = normalPlayerSpeed * playerSpeedFactor;
@@ -87,6 +88,7 @@ public class GhostMode : MonoBehaviour
             isGhostModeActive = false;
             Time.timeScale = normalTimeScale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            postProcessVolume.enabled = false;
             if (playerController != null)
             {
                 playerController.moveSpeed = normalPlayerSpeed;

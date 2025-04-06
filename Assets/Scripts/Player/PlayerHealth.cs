@@ -37,14 +37,13 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
-    /*Se trato de implementar un objeto de curacion pero no conseguí que fucnionara, 
-     * entiendo que por un problema de colisiones
+  
     public void Heal(int healAmount)
     {
         currentHealth += healAmount;
         healthUI.UpdateHearts(currentHealth);
     }
-    */
+    
 
     void Die()
     {

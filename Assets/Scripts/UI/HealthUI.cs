@@ -8,9 +8,14 @@ public class HealthUI : MonoBehaviour
     public Image heartPrefab;
     public Sprite fullHeartSprite;
     public Sprite emptyHeartSprite;
+    public Color orgColor;
 
     private List<Image> hearts = new List<Image>();
 
+    private void Awake()
+    {
+        orgColor = heartPrefab.color;
+    }
     public void SetMaxHearts (int maxHearts)
     {
         foreach(Image heart in hearts)
@@ -34,6 +39,7 @@ public class HealthUI : MonoBehaviour
             if (i < currentHealth)
             {
                 hearts[i].sprite = fullHeartSprite;
+                hearts[i].color = orgColor;
             }
             else
             {
